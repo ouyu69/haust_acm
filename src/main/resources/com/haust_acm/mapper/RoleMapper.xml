@@ -1,0 +1,257 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+		"http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.haust_acm.mapper.RoleMapper">
+	<!--实体映射-->
+	<resultMap id="base_result_map" type="com.haust_acm.entity.po.Role">
+		<!--角色id-->
+		<id property="roleId" column="role_id"/>
+		<!--角色名称-->
+		<result property="roleName" column="role_name"/>
+		<!--角色描述-->
+		<result property="description" column="description"/>
+		<!--角色创建时间-->
+		<result property="createTime" column="create_time"/>
+		<!--角色最近一次更新时间-->
+		<result property="updateTime" column="update_time"/>
+		<!--角色状态 0:正常,1:废除,-->
+		<result property="status" column="status"/>
+	</resultMap>
+
+	<!--通用查询结果列-->
+	<sql id="base_column_list">
+		role_id,role_name,description,create_time,update_time,status
+	</sql>
+
+	<!--基础查询条件-->
+	<sql id="base_query_condition">
+		<if test="query.roleId != null">
+			and role_id = #{query.roleId}
+		</if>
+		<if test="query.roleName != null and query.roleName != ''">
+			and role_name = #{query.roleName}
+		</if>
+		<if test="query.description != null and query.description != ''">
+			and description = #{query.description}
+		</if>
+		<if test="query.createTime != null">
+			and create_time = #{query.createTime}
+		</if>
+		<if test="query.updateTime != null">
+			and update_time = #{query.updateTime}
+		</if>
+		<if test="query.status != null">
+			and status = #{query.status}
+		</if>
+	</sql>
+
+	<!--扩展的查询条件-->
+	<sql id="base_query_condition_extend">
+		<if test="query.roleNameFuzzy != null and query.roleNameFuzzy != ''">
+			and role_name like concat('%',#{query.roleNameFuzzy},'%')
+		</if>
+		<if test="query.descriptionFuzzy != null and query.descriptionFuzzy != ''">
+			and description like concat('%',#{query.descriptionFuzzy},'%')
+		</if>
+		<if test="query.createTimeStart != null and query.createTimeStart != ''">
+			<![CDATA[ and create_time >= str_to_date(#{query.createTimeStart},'%Y-%m-%d')]]>
+		</if>
+		<if test="query.createTimeEnd != null and query.createTimeEnd != ''">
+			<![CDATA[ and create_time < date_sub(str_to_date(#{query.createTimeEnd},'%Y-%m-%d'), interval -1 day)]]>
+		</if>
+		<if test="query.updateTimeStart != null and query.updateTimeStart != ''">
+			<![CDATA[ and update_time >= str_to_date(#{query.updateTimeStart},'%Y-%m-%d')]]>
+		</if>
+		<if test="query.updateTimeEnd != null and query.updateTimeEnd != ''">
+			<![CDATA[ and update_time < date_sub(str_to_date(#{query.updateTimeEnd},'%Y-%m-%d'), interval -1 day)]]>
+		</if>
+	</sql>
+
+	<!--通用查询条件-->
+	<sql id="query_condition">
+		<where>
+			<include refid="base_query_condition"/>
+			<include refid="base_query_condition_extend"/>
+		</where>
+	</sql>
+
+	<!--查询列表-->
+	<select id = "selectList" resultMap = "base_result_map">
+		SELECT <include refid = "base_column_list"/> FROM role <include refid = "query_condition"/>
+		<if test="query.orderBy != null"> ORDER BY #{query.orderBy} </if>
+		<if test="query.simplePage != null"> LIMIT #{query.simplePage.start},#{query.simplePage.end} </if>
+	</select>
+
+	<!--查询数量-->
+	<select id = "selectCount" resultType = "java.lang.Long">
+		SELECT COUNT(1) FROM role <include refid = "query_condition"/>
+	</select>
+
+	<!--插入(匹配有值的字段)-->
+	<insert id = "insert" parameterType = "com.haust_acm.entity.po.Role">
+		INSERT INTO role
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test= "bean.roleId != null">
+				role_id, 
+			</if>
+			<if test= "bean.roleName != null and bean.role_name != ''">
+				role_name, 
+			</if>
+			<if test= "bean.description != null and bean.description != ''">
+				description, 
+			</if>
+			<if test= "bean.createTime != null">
+				create_time, 
+			</if>
+			<if test= "bean.updateTime != null">
+				update_time, 
+			</if>
+			<if test= "bean.status != null">
+				status, 
+			</if>
+		</trim>
+		<trim prefix="VALUES (" suffix=")" suffixOverrides=",">
+			<if test= "bean.roleId != null">
+				#{bean.roleId}, 
+			</if>
+			<if test= "bean.roleName != null and bean.role_name != ''">
+				#{bean.roleName}, 
+			</if>
+			<if test= "bean.description != null and bean.description != ''">
+				#{bean.description}, 
+			</if>
+			<if test= "bean.createTime != null">
+				#{bean.createTime}, 
+			</if>
+			<if test= "bean.updateTime != null">
+				#{bean.updateTime}, 
+			</if>
+			<if test= "bean.status != null">
+				#{bean.status}, 
+			</if>
+		</trim>
+	</insert>
+	<!--插入或者更新(匹配有值的字段)-->
+	<insert id = "insertOrUpdate" parameterType = "com.haust_acm.entity.po.Role">
+		INSERT INTO role
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test= "bean.roleId != null">
+				role_id, 
+			</if>
+			<if test= "bean.roleName != null and bean.role_name != ''">
+				role_name, 
+			</if>
+			<if test= "bean.description != null and bean.description != ''">
+				description, 
+			</if>
+			<if test= "bean.createTime != null">
+				create_time, 
+			</if>
+			<if test= "bean.updateTime != null">
+				update_time, 
+			</if>
+			<if test= "bean.status != null">
+				status, 
+			</if>
+		</trim>
+		<trim prefix="VALUES (" suffix=")" suffixOverrides=",">
+			<if test= "bean.roleId != null">
+				#{bean.roleId}, 
+			</if>
+			<if test= "bean.roleName != null and bean.role_name != ''">
+				#{bean.roleName}, 
+			</if>
+			<if test= "bean.description != null and bean.description != ''">
+				#{bean.description}, 
+			</if>
+			<if test= "bean.createTime != null">
+				#{bean.createTime}, 
+			</if>
+			<if test= "bean.updateTime != null">
+				#{bean.updateTime}, 
+			</if>
+			<if test= "bean.status != null">
+				#{bean.status}, 
+			</if>
+		</trim>
+		ON DUPLICATE KEY UPDATE
+		<trim prefix="" suffix="" suffixOverrides=",">
+			<if test="bean.roleName != null and bean.role_name != ''">
+				role_name = VALUES(role_name), 
+			</if>
+			<if test="bean.description != null and bean.description != ''">
+				description = VALUES(description), 
+			</if>
+			<if test="bean.createTime != null">
+				create_time = VALUES(create_time), 
+			</if>
+			<if test="bean.updateTime != null">
+				update_time = VALUES(update_time), 
+			</if>
+			<if test="bean.status != null">
+				status = VALUES(status), 
+			</if>
+		</trim>
+	</insert>
+
+	<!--添加(批量擦插入)-->
+	<insert id="insertBatch" parameterType="com.haust_acm.entity.po.Role" useGeneratedKeys="true" keyProperty="user_id">
+		INSERT INTO role (role_id,role_name,description,create_time,update_time,status) VALUES
+		<foreach collection="list" item="item" separator=",">
+			(#{item.roleId},#{item.roleName},#{item.description},#{item.createTime},#{item.updateTime},#{item.status})
+		</foreach>
+	</insert>
+
+	<!--批量插入或更新-->
+	<insert id="insertOrUpdateBatch" parameterType="com.haust_acm.entity.po.Role" useGeneratedKeys="true" keyProperty="user_id">
+		INSERT INTO role (role_id,role_name,description,create_time,update_time,status) VALUES
+		<foreach collection="list" item="item" separator="," >
+			(#{item.roleId},#{item.roleName},#{item.description},#{item.createTime},#{item.updateTime},#{item.status})
+		</foreach>
+		ON DUPLICATE KEY UPDATE
+		role_id = VALUES(role_id),
+		role_name = VALUES(role_name),
+		description = VALUES(description),
+		create_time = VALUES(create_time),
+		update_time = VALUES(update_time),
+		status = VALUES(status)
+	</insert>
+
+	<!--根据RoleId查询-->
+	<select id="selectByRoleId" resultMap="base_result_map">
+		SELECT <include refid="base_column_list"/> FROM role WHERE role_id = #{roleId}
+	</select>
+
+	<!--根据RoleId删除-->
+	<delete id="deleteByRoleId">
+		DELETE FROM role WHERE role_id = #{roleId}
+	</delete>
+
+	<!--根据RoleId更新-->
+	<update id="updateByRoleId" parameterType="com.haust_acm.entity.po.Role">
+		UPDATE role
+		<set>
+			<if test="bean.roleId != null">
+				role_id = #{bean.roleId}
+			</if>
+			<if test="bean.roleName != null and bean.roleName != ''">
+				role_name = #{bean.roleName}
+			</if>
+			<if test="bean.description != null and bean.description != ''">
+				description = #{bean.description}
+			</if>
+			<if test="bean.createTime != null">
+				create_time = #{bean.createTime}
+			</if>
+			<if test="bean.updateTime != null">
+				update_time = #{bean.updateTime}
+			</if>
+			<if test="bean.status != null">
+				status = #{bean.status}
+			</if>
+		</set>
+		WHERE role_id = #{roleId}
+	</update>
+
+
+</mapper>

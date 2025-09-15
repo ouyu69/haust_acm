@@ -1,0 +1,140 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+		"http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.haust_acm.mapper.RolePermissionsMapper">
+	<!--实体映射-->
+	<resultMap id="base_result_map" type="com.haust_acm.entity.po.RolePermissions">
+		<!--角色id-->
+		<id property="roleId" column="role_id"/>
+		<!--权限id-->
+		<id property="permissionId" column="permission_id"/>
+	</resultMap>
+
+	<!--通用查询结果列-->
+	<sql id="base_column_list">
+		role_id,permission_id
+	</sql>
+
+	<!--基础查询条件-->
+	<sql id="base_query_condition">
+		<if test="query.roleId != null">
+			and role_id = #{query.roleId}
+		</if>
+		<if test="query.permissionId != null">
+			and permission_id = #{query.permissionId}
+		</if>
+	</sql>
+
+	<!--扩展的查询条件-->
+	<sql id="base_query_condition_extend">
+	</sql>
+
+	<!--通用查询条件-->
+	<sql id="query_condition">
+		<where>
+			<include refid="base_query_condition"/>
+			<include refid="base_query_condition_extend"/>
+		</where>
+	</sql>
+
+	<!--查询列表-->
+	<select id = "selectList" resultMap = "base_result_map">
+		SELECT <include refid = "base_column_list"/> FROM role_permissions <include refid = "query_condition"/>
+		<if test="query.orderBy != null"> ORDER BY #{query.orderBy} </if>
+		<if test="query.simplePage != null"> LIMIT #{query.simplePage.start},#{query.simplePage.end} </if>
+	</select>
+
+	<!--查询数量-->
+	<select id = "selectCount" resultType = "java.lang.Long">
+		SELECT COUNT(1) FROM role_permissions <include refid = "query_condition"/>
+	</select>
+
+	<!--插入(匹配有值的字段)-->
+	<insert id = "insert" parameterType = "com.haust_acm.entity.po.RolePermissions">
+		INSERT INTO role_permissions
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test= "bean.roleId != null">
+				role_id, 
+			</if>
+			<if test= "bean.permissionId != null">
+				permission_id, 
+			</if>
+		</trim>
+		<trim prefix="VALUES (" suffix=")" suffixOverrides=",">
+			<if test= "bean.roleId != null">
+				#{bean.roleId}, 
+			</if>
+			<if test= "bean.permissionId != null">
+				#{bean.permissionId}, 
+			</if>
+		</trim>
+	</insert>
+	<!--插入或者更新(匹配有值的字段)-->
+	<insert id = "insertOrUpdate" parameterType = "com.haust_acm.entity.po.RolePermissions">
+		INSERT INTO role_permissions
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test= "bean.roleId != null">
+				role_id, 
+			</if>
+			<if test= "bean.permissionId != null">
+				permission_id, 
+			</if>
+		</trim>
+		<trim prefix="VALUES (" suffix=")" suffixOverrides=",">
+			<if test= "bean.roleId != null">
+				#{bean.roleId}, 
+			</if>
+			<if test= "bean.permissionId != null">
+				#{bean.permissionId}, 
+			</if>
+		</trim>
+		ON DUPLICATE KEY UPDATE
+		<trim prefix="" suffix="" suffixOverrides=",">
+		</trim>
+	</insert>
+
+	<!--添加(批量擦插入)-->
+	<insert id="insertBatch" parameterType="com.haust_acm.entity.po.RolePermissions" useGeneratedKeys="true" keyProperty="user_id">
+		INSERT INTO role_permissions (role_id,permission_id) VALUES
+		<foreach collection="list" item="item" separator=",">
+			(#{item.roleId},#{item.permissionId})
+		</foreach>
+	</insert>
+
+	<!--批量插入或更新-->
+	<insert id="insertOrUpdateBatch" parameterType="com.haust_acm.entity.po.RolePermissions" useGeneratedKeys="true" keyProperty="user_id">
+		INSERT INTO role_permissions (role_id,permission_id) VALUES
+		<foreach collection="list" item="item" separator="," >
+			(#{item.roleId},#{item.permissionId})
+		</foreach>
+		ON DUPLICATE KEY UPDATE
+		role_id = VALUES(role_id),
+		permission_id = VALUES(permission_id)
+	</insert>
+
+	<!--根据RoleIdAndPermissionId查询-->
+	<select id="selectByRoleIdAndPermissionId" resultMap="base_result_map">
+		SELECT <include refid="base_column_list"/> FROM role_permissions WHERE role_id = #{roleId} AND permission_id = #{permissionId}
+	</select>
+
+	<!--根据RoleIdAndPermissionId删除-->
+	<delete id="deleteByRoleIdAndPermissionId">
+		DELETE FROM role_permissions WHERE role_id = #{roleId} AND permission_id = #{permissionId}
+	</delete>
+
+	<!--根据RoleIdAndPermissionId更新-->
+	<update id="updateByRoleIdAndPermissionId" parameterType="com.haust_acm.entity.po.RolePermissions">
+		UPDATE role_permissions
+		<set>
+			<if test="bean.roleId != null">
+				role_id = #{bean.roleId}
+			</if>
+			<if test="bean.permissionId != null">
+				permission_id = #{bean.permissionId}
+			</if>
+		</set>
+		WHERE role_id = #{roleId} AND permission_id = #{permissionId}
+	</update>
+
+
+</mapper>

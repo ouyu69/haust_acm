@@ -12,7 +12,7 @@ import java.util.List;
 
 /**
  * @Description Controller
- * @Date 2025-09-13
+ * @Date 2025-09-15
  * @Author ouyu
  **/
 @RestController
@@ -26,7 +26,7 @@ public class RolePermissionsController extends ABaseController {
 	 **/
 	@RequestMapping("loadDataList")
 	public ResponseVO loadDataList(RolePermissionsQuery query) {
-		return getSuccessResponseVO(rolePermissionsService.findByPage(query));
+		return getSuccessResponseVO(rolePermissionsService.findByPage(query),null);
 	}
 
 	/**
@@ -34,7 +34,7 @@ public class RolePermissionsController extends ABaseController {
 	 **/
 	@RequestMapping("add")
 	public ResponseVO add(RolePermissions bean) {
-		return getSuccessResponseVO(rolePermissionsService.add(bean));
+		return getSuccessResponseVO(rolePermissionsService.add(bean),null);
 	}
 
 	/**
@@ -42,7 +42,7 @@ public class RolePermissionsController extends ABaseController {
 	 **/
 	@RequestMapping("addBatch")
 	public ResponseVO addBatch(List<RolePermissions> listBean) {
-		return getSuccessResponseVO(rolePermissionsService.addBatch(listBean));
+		return getSuccessResponseVO(rolePermissionsService.addBatch(listBean),null);
 	}
 
 	/**
@@ -50,7 +50,7 @@ public class RolePermissionsController extends ABaseController {
 	 **/
 	@RequestMapping("addOrUpdateBatch")
 	public ResponseVO addOrUpdateBatch(List<RolePermissions> listBean) {
-		return getSuccessResponseVO(rolePermissionsService.addOrUpdateBatch(listBean));
+		return getSuccessResponseVO(rolePermissionsService.addOrUpdateBatch(listBean),null);
 	}
 
 	/**
@@ -58,7 +58,7 @@ public class RolePermissionsController extends ABaseController {
 	 **/
 	@RequestMapping("getRolePermissionsByRoleIdAndPermissionId")
 	public ResponseVO getRolePermissionsByRoleIdAndPermissionId(Integer roleId, Integer permissionId) {
-		return getSuccessResponseVO(rolePermissionsService.getRolePermissionsByRoleIdAndPermissionId(roleId,permissionId));
+		return getSuccessResponseVO(rolePermissionsService.getRolePermissionsByRoleIdAndPermissionId(roleId,permissionId),null);
 	}
 
 	/**
@@ -66,7 +66,7 @@ public class RolePermissionsController extends ABaseController {
 	 **/
 	@RequestMapping("deleteRolePermissionsByRoleIdAndPermissionId")
 	public ResponseVO deleteRolePermissionsByRoleIdAndPermissionId(Integer roleId, Integer permissionId) {
-		return getSuccessResponseVO(rolePermissionsService.deleteRolePermissionsByRoleIdAndPermissionId(roleId,permissionId));
+		return getSuccessResponseVO(rolePermissionsService.deleteRolePermissionsByRoleIdAndPermissionId(roleId,permissionId),null);
 	}
 
 	/**
@@ -74,7 +74,7 @@ public class RolePermissionsController extends ABaseController {
 	 **/
 	@RequestMapping("updateRolePermissionsByRoleIdAndPermissionId")
 	public ResponseVO updateRolePermissionsByRoleIdAndPermissionId(RolePermissions bean, Integer roleId, Integer permissionId) {
-		return getSuccessResponseVO(rolePermissionsService.updateRolePermissionsByRoleIdAndPermissionId(bean,roleId,permissionId));
+		return getSuccessResponseVO(rolePermissionsService.updateRolePermissionsByRoleIdAndPermissionId(bean,roleId,permissionId),null);
 	}
 
 }

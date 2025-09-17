@@ -4,7 +4,7 @@ import java.util.Date;
 
 /**
  * @Description 用户查询对象
- * @Date 2025-09-13
+ * @Date 2025-09-15
  * @Author ouyu
  **/
 public class UserQuery extends BaseQuery {
@@ -21,7 +21,7 @@ public class UserQuery extends BaseQuery {
 	/**
 	 * 用户邮箱
 	 **/
-	private String emai;
+	private String email;
 
 	/**
 	 * 用户密码
@@ -56,7 +56,7 @@ public class UserQuery extends BaseQuery {
 	/**
 	 * 用户邮箱,模糊查询
 	 **/
-	private String emaiFuzzy;
+	private String emailFuzzy;
 
 	/**
 	 * 用户密码,模糊查询
@@ -100,12 +100,12 @@ public class UserQuery extends BaseQuery {
 		this.userName = userName ;
 	}
 
-	public String getEmai() {
-		return emai ;
+	public String getEmail() {
+		return email;
 	}
 
-	public void setEmai(String emai) {
-		this.emai = emai ;
+	public void setEmail(String email) {
+		this.email = email;
 	}
 
 	public String getPassword() {
@@ -156,12 +156,12 @@ public class UserQuery extends BaseQuery {
 		this.userNameFuzzy = userNameFuzzy ;
 	}
 
-	public String getEmaiFuzzy() {
-		return emaiFuzzy ;
+	public String getEmailFuzzy() {
+		return emailFuzzy;
 	}
 
-	public void setEmaiFuzzy(String emaiFuzzy) {
-		this.emaiFuzzy = emaiFuzzy ;
+	public void setEmailFuzzy(String emailFuzzy) {
+		this.emailFuzzy = emailFuzzy;
 	}
 
 	public String getPasswordFuzzy() {

@@ -19,5 +19,10 @@ public interface UserMapper<T, P> extends BaseMapper<T, P> {
 	 **/
 	Long updateByUserId(@Param("bean") T t, @Param("userId") Long userId);
 
+	/**
+	 * 根据邮箱查询
+	 */
+	T selectByEmail(@Param("email") String email);
+
 
 }

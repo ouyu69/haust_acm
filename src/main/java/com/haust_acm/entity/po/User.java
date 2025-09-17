@@ -9,7 +9,7 @@ import com.haust_acm.utils.DateUtils;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 /**
  * @Description 用户
- * @Date 2025-09-13
+ * @Date 2025-09-15
  * @Author ouyu
  **/
 public class User implements Serializable {
@@ -27,7 +27,7 @@ public class User implements Serializable {
 	/**
 	 * 用户邮箱
 	 **/
-	private String emai;
+	private String email;
 
 	/**
 	 * 用户密码
@@ -37,7 +37,6 @@ public class User implements Serializable {
 	/**
 	 * 用户状态 0:为正常，1为封禁，3为删除
 	 **/
-	@JsonIgnore
 	private Integer status;
 
 	/**
@@ -46,6 +45,10 @@ public class User implements Serializable {
 	@JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", timezone = "GMT+8")
 	@DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
 	private Date createTime;
+
+	@JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", timezone = "GMT+8")
+	@DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
+	private Date updateTime;
 
 	/**
 	 * 用户最后一次登录时间
@@ -75,12 +78,12 @@ public class User implements Serializable {
 		return userName;
 	}
 
-	public void setEmai(String emai) {
-		this.emai = emai;
+	public void setEmail(String email) {
+		this.email = email;
 	}
 
-	public String getEmai() {
-		return emai;
+	public String getEmail() {
+		return email;
 	}
 
 	public void setPassword(String password) {
@@ -123,8 +126,16 @@ public class User implements Serializable {
 		return roleId;
 	}
 
+	public Date getUpdateTime() {
+		return updateTime;
+	}
+
+	public void setUpdateTime(Date updateTime) {
+		this.updateTime = updateTime;
+	}
+
 	@Override
 	public String toString() {
-		return "用户id:" + (userId == null ? "空" : userId) + ",用户名:" + (userName == null ? "空" : userName) + ",用户邮箱:" + (emai == null ? "空" : emai) + ",用户密码:" + (password == null ? "空" : password) + ",用户状态 0:为正常，1为封禁，3为删除:" + (status == null ? "空" : status) + ",用户创建时间:" + (createTime == null ? "空" : DateUtils.format(createTime, DateTimePatternEnum.YYYY_MM_DD_HH_MM_SS.getPattern())) + ",用户最后一次登录时间:" + (lastLogin == null ? "空" : DateUtils.format(lastLogin, DateTimePatternEnum.YYYY_MM_DD_HH_MM_SS.getPattern())) + ",角色id:" + (roleId == null ? "空" : roleId);
+		return "用户id:" + (userId == null ? "空" : userId) + ",用户名:" + (userName == null ? "空" : userName) + ",用户邮箱:" + (email == null ? "空" : email) + ",用户密码:" + (password == null ? "空" : password) + ",用户状态 0:为正常，1为封禁，3为删除:" + (status == null ? "空" : status) + ",用户创建时间:" + (createTime == null ? "空" : DateUtils.format(createTime, DateTimePatternEnum.YYYY_MM_DD_HH_MM_SS.getPattern())) + ",用户最后一次登录时间:" + (lastLogin == null ? "空" : DateUtils.format(lastLogin, DateTimePatternEnum.YYYY_MM_DD_HH_MM_SS.getPattern())) + ",角色id:" + (roleId == null ? "空" : roleId);
 	}
 }

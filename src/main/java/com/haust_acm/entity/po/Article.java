@@ -9,7 +9,7 @@ import com.haust_acm.utils.DateUtils;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 /**
  * @Description 文章
- * @Date 2025-09-13
+ * @Date 2025-09-15
  * @Author ouyu
  **/
 public class Article implements Serializable {
@@ -37,7 +37,7 @@ public class Article implements Serializable {
 	/**
 	 * 文章状态 0:正常,1:删除
 	 **/
-	@JsonIgnore
+//	@JsonIgnore
 	private Integer status;
 
 	/**
@@ -53,6 +53,7 @@ public class Article implements Serializable {
 	@JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", timezone = "GMT+8")
 	@DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
 	private Date updateTime;
+
 
 	public void setArticleId(Long articleId) {
 		this.articleId = articleId;

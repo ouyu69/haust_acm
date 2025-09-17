@@ -9,7 +9,7 @@
 		<!--用户名-->
 		<result property="userName" column="user_name"/>
 		<!--用户邮箱-->
-		<result property="emai" column="emai"/>
+		<result property="email" column="email"/>
 		<!--用户密码-->
 		<result property="password" column="password"/>
 		<!--用户状态 0:为正常，1为封禁，3为删除-->
@@ -24,7 +24,7 @@
 
 	<!--通用查询结果列-->
 	<sql id="base_column_list">
-		user_id,user_name,emai,password,status,create_time,last_login,role_id
+		user_id,user_name,email,password,status,create_time,last_login,role_id
 	</sql>
 
 	<!--基础查询条件-->
@@ -35,8 +35,8 @@
 		<if test="query.userName != null and query.userName != ''">
 			and user_name = #{query.userName}
 		</if>
-		<if test="query.emai != null and query.emai != ''">
-			and emai = #{query.emai}
+		<if test="query.email != null and query.email != ''">
+			and email = #{query.email}
 		</if>
 		<if test="query.password != null and query.password != ''">
 			and password = #{query.password}
@@ -60,8 +60,8 @@
 		<if test="query.userNameFuzzy != null and query.userNameFuzzy != ''">
 			and user_name like concat('%',#{query.userNameFuzzy},'%')
 		</if>
-		<if test="query.emaiFuzzy != null and query.emaiFuzzy != ''">
-			and emai like concat('%',#{query.emaiFuzzy},'%')
+		<if test="query.emailFuzzy != null and query.emailFuzzy != ''">
+			and email like concat('%',#{query.emailFuzzy},'%')
 		</if>
 		<if test="query.passwordFuzzy != null and query.passwordFuzzy != ''">
 			and password like concat('%',#{query.passwordFuzzy},'%')
@@ -110,11 +110,11 @@
 			<if test= "bean.userId != null">
 				user_id, 
 			</if>
-			<if test= "bean.userName != null and bean.user_name != ''">
+			<if test= "bean.userName != null and bean.userName != ''">
 				user_name, 
 			</if>
-			<if test= "bean.emai != null and bean.emai != ''">
-				emai, 
+			<if test= "bean.email != null and bean.email != ''">
+				email,
 			</if>
 			<if test= "bean.password != null and bean.password != ''">
 				password, 
@@ -136,11 +136,11 @@
 			<if test= "bean.userId != null">
 				#{bean.userId}, 
 			</if>
-			<if test= "bean.userName != null and bean.user_name != ''">
+			<if test= "bean.userName != null and bean.userName != ''">
 				#{bean.userName}, 
 			</if>
-			<if test= "bean.emai != null and bean.emai != ''">
-				#{bean.emai}, 
+			<if test= "bean.email != null and bean.email != ''">
+				#{bean.email},
 			</if>
 			<if test= "bean.password != null and bean.password != ''">
 				#{bean.password}, 
@@ -159,6 +159,7 @@
 			</if>
 		</trim>
 	</insert>
+
 	<!--插入或者更新(匹配有值的字段)-->
 	<insert id = "insertOrUpdate" parameterType = "com.haust_acm.entity.po.User">
 		INSERT INTO user
@@ -166,11 +167,11 @@
 			<if test= "bean.userId != null">
 				user_id, 
 			</if>
-			<if test= "bean.userName != null and bean.user_name != ''">
+			<if test= "bean.userName != null and bean.userName != ''">
 				user_name, 
 			</if>
-			<if test= "bean.emai != null and bean.emai != ''">
-				emai, 
+			<if test= "bean.email != null and bean.email != ''">
+				email,
 			</if>
 			<if test= "bean.password != null and bean.password != ''">
 				password, 
@@ -192,11 +193,11 @@
 			<if test= "bean.userId != null">
 				#{bean.userId}, 
 			</if>
-			<if test= "bean.userName != null and bean.user_name != ''">
+			<if test= "bean.userName != null and bean.userName != ''">
 				#{bean.userName}, 
 			</if>
-			<if test= "bean.emai != null and bean.emai != ''">
-				#{bean.emai}, 
+			<if test= "bean.email != null and bean.email != ''">
+				#{bean.email},
 			</if>
 			<if test= "bean.password != null and bean.password != ''">
 				#{bean.password}, 
@@ -216,11 +217,11 @@
 		</trim>
 		ON DUPLICATE KEY UPDATE
 		<trim prefix="" suffix="" suffixOverrides=",">
-			<if test="bean.userName != null and bean.user_name != ''">
+			<if test="bean.userName != null and bean.userName != ''">
 				user_name = VALUES(user_name), 
 			</if>
-			<if test="bean.emai != null and bean.emai != ''">
-				emai = VALUES(emai), 
+			<if test="bean.email != null and bean.email != ''">
+				email = VALUES(email),
 			</if>
 			<if test="bean.password != null and bean.password != ''">
 				password = VALUES(password), 
@@ -242,28 +243,28 @@
 
 	<!--添加(批量擦插入)-->
 	<insert id="insertBatch" parameterType="com.haust_acm.entity.po.User" useGeneratedKeys="true" keyProperty="user_id">
-		INSERT INTO user (user_name,emai,password,status,create_time,last_login,role_id) VALUES
+		INSERT INTO user (user_name,email,password,status,role_id) VALUES
 		<foreach collection="list" item="item" separator=",">
-			(#{item.userName},#{item.emai},#{item.password},#{item.status},#{item.createTime},#{item.lastLogin},#{item.roleId})
+			(#{item.userName},#{item.email},#{item.password},#{item.status},#{item.roleId})
 		</foreach>
 	</insert>
 
 	<!--批量插入或更新-->
 	<insert id="insertOrUpdateBatch" parameterType="com.haust_acm.entity.po.User" useGeneratedKeys="true" keyProperty="user_id">
-		INSERT INTO user (user_id,user_name,emai,password,status,create_time,last_login,role_id) VALUES
+		INSERT INTO user (user_id,user_name,email,password,status,last_login,role_id) VALUES
 		<foreach collection="list" item="item" separator="," >
-			(#{item.userId},#{item.userName},#{item.emai},#{item.password},#{item.status},#{item.createTime},#{item.lastLogin},#{item.roleId})
+			(#{item.userId},#{item.userName},#{item.email},#{item.password},#{item.status},#{item.lastLogin},#{item.roleId})
 		</foreach>
 		ON DUPLICATE KEY UPDATE
 		user_id = VALUES(user_id),
 		user_name = VALUES(user_name),
-		emai = VALUES(emai),
+		email = VALUES(email),
 		password = VALUES(password),
 		status = VALUES(status),
-		create_time = VALUES(create_time),
 		last_login = VALUES(last_login),
 		role_id = VALUES(role_id)
 	</insert>
+
 
 	<!--根据UserId查询-->
 	<select id="selectByUserId" resultMap="base_result_map">
@@ -282,8 +283,8 @@
 			<if test="bean.userName != null and bean.userName != ''">
 				user_name = #{bean.userName}
 			</if>
-			<if test="bean.emai != null and bean.emai != ''">
-				emai = #{bean.emai}
+			<if test="bean.email != null and bean.email != ''">
+				email = #{bean.email}
 			</if>
 			<if test="bean.password != null and bean.password != ''">
 				password = #{bean.password}
@@ -303,6 +304,11 @@
 		</set>
 		WHERE user_id = #{userId}
 	</update>
+
+	<!--根据邮箱查询	-->
+	<select id="selectByEmail" resultMap="base_result_map">
+		SELECT <include refid="base_column_list"/> FROM user WHERE email = #{email}
+	</select>
 
 
 </mapper>

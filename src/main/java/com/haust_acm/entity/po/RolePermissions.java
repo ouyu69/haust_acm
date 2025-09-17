@@ -4,7 +4,7 @@ import java.io.Serializable;
 
 /**
  * @Description 
- * @Date 2025-09-13
+ * @Date 2025-09-15
  * @Author ouyu
  **/
 public class RolePermissions implements Serializable {

@@ -4,7 +4,7 @@ import java.util.Date;
 
 /**
  * @Description 查询对象
- * @Date 2025-09-13
+ * @Date 2025-09-15
  * @Author ouyu
  **/
 public class RoleQuery extends BaseQuery {

@@ -5,6 +5,7 @@ import com.haust_acm.service.UserService;
 import com.haust_acm.entity.query.UserQuery;
 import com.haust_acm.entity.vo.ResponseVO;
 
+import org.springframework.web.bind.annotation.RequestBody;
 import  org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import javax.annotation.Resource;
@@ -12,7 +13,7 @@ import java.util.List;
 
 /**
  * @Description 用户Controller
- * @Date 2025-09-13
+ * @Date 2025-09-15
  * @Author ouyu
  **/
 @RestController
@@ -26,7 +27,7 @@ public class UserController extends ABaseController {
 	 **/
 	@RequestMapping("loadDataList")
 	public ResponseVO loadDataList(UserQuery query) {
-		return getSuccessResponseVO(userService.findByPage(query));
+		return getSuccessResponseVO(userService.findByPage(query),null);
 	}
 
 	/**
@@ -34,23 +35,23 @@ public class UserController extends ABaseController {
 	 **/
 	@RequestMapping("add")
 	public ResponseVO add(User bean) {
-		return getSuccessResponseVO(userService.add(bean));
+		return getSuccessResponseVO(userService.add(bean),null);
 	}
 
 	/**
 	 * 批量新增
 	 **/
 	@RequestMapping("addBatch")
-	public ResponseVO addBatch(List<User> listBean) {
-		return getSuccessResponseVO(userService.addBatch(listBean));
+	public ResponseVO addBatch(@RequestBody List<User> listBean) {
+		return getSuccessResponseVO(userService.addBatch(listBean),null);
 	}
 
 	/**
 	 * 批量新增或更新
 	 **/
 	@RequestMapping("addOrUpdateBatch")
-	public ResponseVO addOrUpdateBatch(List<User> listBean) {
-		return getSuccessResponseVO(userService.addOrUpdateBatch(listBean));
+	public ResponseVO addOrUpdateBatch(@RequestBody List<User> listBean) {
+		return getSuccessResponseVO(userService.addOrUpdateBatch(listBean),null);
 	}
 
 	/**
@@ -58,7 +59,7 @@ public class UserController extends ABaseController {
 	 **/
 	@RequestMapping("getUserByUserId")
 	public ResponseVO getUserByUserId(Long userId) {
-		return getSuccessResponseVO(userService.getUserByUserId(userId));
+		return getSuccessResponseVO(userService.getUserByUserId(userId),null);
 	}
 
 	/**
@@ -66,7 +67,7 @@ public class UserController extends ABaseController {
 	 **/
 	@RequestMapping("deleteUserByUserId")
 	public ResponseVO deleteUserByUserId(Long userId) {
-		return getSuccessResponseVO(userService.deleteUserByUserId(userId));
+		return getSuccessResponseVO(userService.deleteUserByUserId(userId),null);
 	}
 
 	/**
@@ -74,7 +75,7 @@ public class UserController extends ABaseController {
 	 **/
 	@RequestMapping("updateUserByUserId")
 	public ResponseVO updateUserByUserId(User bean, Long userId) {
-		return getSuccessResponseVO(userService.updateUserByUserId(bean,userId));
+		return getSuccessResponseVO(userService.updateUserByUserId(bean,userId),null);
 	}
 
 }

@@ -31,7 +31,7 @@ public class SimplePage {
             this.pageSize = PageSize.SIZE20.getSize();
         }
         if (countTotal > 0) {
-            this.pageTotal = this.countTotal % (this.pageSize == 0 ? this.countTotal / this.pageSize : this.countTotal / this.pageSize + 1);
+            this.pageTotal = (this.countTotal + this.pageSize - 1) / this.pageSize;
         } else {
             pageTotal = 1L;
         }

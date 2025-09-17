@@ -9,7 +9,7 @@ import com.haust_acm.utils.DateUtils;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 /**
  * @Description 
- * @Date 2025-09-13
+ * @Date 2025-09-15
  * @Author ouyu
  **/
 public class Role implements Serializable {

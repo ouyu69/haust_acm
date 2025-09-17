@@ -12,7 +12,7 @@ import java.util.List;
 
 /**
  * @Description 权限Controller
- * @Date 2025-09-13
+ * @Date 2025-09-15
  * @Author ouyu
  **/
 @RestController
@@ -26,7 +26,7 @@ public class PermissionsController extends ABaseController {
 	 **/
 	@RequestMapping("loadDataList")
 	public ResponseVO loadDataList(PermissionsQuery query) {
-		return getSuccessResponseVO(permissionsService.findByPage(query));
+		return getSuccessResponseVO(permissionsService.findByPage(query),null);
 	}
 
 	/**
@@ -34,7 +34,7 @@ public class PermissionsController extends ABaseController {
 	 **/
 	@RequestMapping("add")
 	public ResponseVO add(Permissions bean) {
-		return getSuccessResponseVO(permissionsService.add(bean));
+		return getSuccessResponseVO(permissionsService.add(bean),null);
 	}
 
 	/**
@@ -42,7 +42,7 @@ public class PermissionsController extends ABaseController {
 	 **/
 	@RequestMapping("addBatch")
 	public ResponseVO addBatch(List<Permissions> listBean) {
-		return getSuccessResponseVO(permissionsService.addBatch(listBean));
+		return getSuccessResponseVO(permissionsService.addBatch(listBean),null);
 	}
 
 	/**
@@ -50,7 +50,7 @@ public class PermissionsController extends ABaseController {
 	 **/
 	@RequestMapping("addOrUpdateBatch")
 	public ResponseVO addOrUpdateBatch(List<Permissions> listBean) {
-		return getSuccessResponseVO(permissionsService.addOrUpdateBatch(listBean));
+		return getSuccessResponseVO(permissionsService.addOrUpdateBatch(listBean),null);
 	}
 
 	/**
@@ -58,7 +58,7 @@ public class PermissionsController extends ABaseController {
 	 **/
 	@RequestMapping("getPermissionsByPermissionId")
 	public ResponseVO getPermissionsByPermissionId(Integer permissionId) {
-		return getSuccessResponseVO(permissionsService.getPermissionsByPermissionId(permissionId));
+		return getSuccessResponseVO(permissionsService.getPermissionsByPermissionId(permissionId),null);
 	}
 
 	/**
@@ -66,7 +66,7 @@ public class PermissionsController extends ABaseController {
 	 **/
 	@RequestMapping("deletePermissionsByPermissionId")
 	public ResponseVO deletePermissionsByPermissionId(Integer permissionId) {
-		return getSuccessResponseVO(permissionsService.deletePermissionsByPermissionId(permissionId));
+		return getSuccessResponseVO(permissionsService.deletePermissionsByPermissionId(permissionId),null);
 	}
 
 	/**
@@ -74,7 +74,7 @@ public class PermissionsController extends ABaseController {
 	 **/
 	@RequestMapping("updatePermissionsByPermissionId")
 	public ResponseVO updatePermissionsByPermissionId(Permissions bean, Integer permissionId) {
-		return getSuccessResponseVO(permissionsService.updatePermissionsByPermissionId(bean,permissionId));
+		return getSuccessResponseVO(permissionsService.updatePermissionsByPermissionId(bean,permissionId),null);
 	}
 
 }

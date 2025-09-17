@@ -7,7 +7,7 @@ import java.util.List;
 
 /**
  * @Description 权限Service
- * @Date 2025-09-13
+ * @Date 2025-09-15
  * @Author ouyu
  **/
 public interface PermissionsService {

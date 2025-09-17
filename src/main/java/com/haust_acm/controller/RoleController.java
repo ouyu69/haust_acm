@@ -12,7 +12,7 @@ import java.util.List;
 
 /**
  * @Description Controller
- * @Date 2025-09-13
+ * @Date 2025-09-15
  * @Author ouyu
  **/
 @RestController
@@ -26,7 +26,7 @@ public class RoleController extends ABaseController {
 	 **/
 	@RequestMapping("loadDataList")
 	public ResponseVO loadDataList(RoleQuery query) {
-		return getSuccessResponseVO(roleService.findByPage(query));
+		return getSuccessResponseVO(roleService.findByPage(query),null);
 	}
 
 	/**
@@ -34,7 +34,7 @@ public class RoleController extends ABaseController {
 	 **/
 	@RequestMapping("add")
 	public ResponseVO add(Role bean) {
-		return getSuccessResponseVO(roleService.add(bean));
+		return getSuccessResponseVO(roleService.add(bean),null);
 	}
 
 	/**
@@ -42,7 +42,7 @@ public class RoleController extends ABaseController {
 	 **/
 	@RequestMapping("addBatch")
 	public ResponseVO addBatch(List<Role> listBean) {
-		return getSuccessResponseVO(roleService.addBatch(listBean));
+		return getSuccessResponseVO(roleService.addBatch(listBean),null);
 	}
 
 	/**
@@ -50,7 +50,7 @@ public class RoleController extends ABaseController {
 	 **/
 	@RequestMapping("addOrUpdateBatch")
 	public ResponseVO addOrUpdateBatch(List<Role> listBean) {
-		return getSuccessResponseVO(roleService.addOrUpdateBatch(listBean));
+		return getSuccessResponseVO(roleService.addOrUpdateBatch(listBean),null);
 	}
 
 	/**
@@ -58,7 +58,7 @@ public class RoleController extends ABaseController {
 	 **/
 	@RequestMapping("getRoleByRoleId")
 	public ResponseVO getRoleByRoleId(Integer roleId) {
-		return getSuccessResponseVO(roleService.getRoleByRoleId(roleId));
+		return getSuccessResponseVO(roleService.getRoleByRoleId(roleId),null);
 	}
 
 	/**
@@ -66,7 +66,7 @@ public class RoleController extends ABaseController {
 	 **/
 	@RequestMapping("deleteRoleByRoleId")
 	public ResponseVO deleteRoleByRoleId(Integer roleId) {
-		return getSuccessResponseVO(roleService.deleteRoleByRoleId(roleId));
+		return getSuccessResponseVO(roleService.deleteRoleByRoleId(roleId),null);
 	}
 
 	/**
@@ -74,7 +74,7 @@ public class RoleController extends ABaseController {
 	 **/
 	@RequestMapping("updateRoleByRoleId")
 	public ResponseVO updateRoleByRoleId(Role bean, Integer roleId) {
-		return getSuccessResponseVO(roleService.updateRoleByRoleId(bean,roleId));
+		return getSuccessResponseVO(roleService.updateRoleByRoleId(bean,roleId),null);
 	}
 
 }

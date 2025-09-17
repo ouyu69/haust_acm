@@ -94,7 +94,7 @@
 			<if test= "bean.roleId != null">
 				role_id, 
 			</if>
-			<if test= "bean.roleName != null and bean.role_name != ''">
+			<if test= "bean.roleName != null and bean.roleName != ''">
 				role_name, 
 			</if>
 			<if test= "bean.description != null and bean.description != ''">
@@ -114,7 +114,7 @@
 			<if test= "bean.roleId != null">
 				#{bean.roleId}, 
 			</if>
-			<if test= "bean.roleName != null and bean.role_name != ''">
+			<if test= "bean.roleName != null and bean.roleName != ''">
 				#{bean.roleName}, 
 			</if>
 			<if test= "bean.description != null and bean.description != ''">
@@ -138,7 +138,7 @@
 			<if test= "bean.roleId != null">
 				role_id, 
 			</if>
-			<if test= "bean.roleName != null and bean.role_name != ''">
+			<if test= "bean.roleName != null and bean.roleName != ''">
 				role_name, 
 			</if>
 			<if test= "bean.description != null and bean.description != ''">
@@ -158,7 +158,7 @@
 			<if test= "bean.roleId != null">
 				#{bean.roleId}, 
 			</if>
-			<if test= "bean.roleName != null and bean.role_name != ''">
+			<if test= "bean.roleName != null and bean.roleName != ''">
 				#{bean.roleName}, 
 			</if>
 			<if test= "bean.description != null and bean.description != ''">
@@ -176,7 +176,7 @@
 		</trim>
 		ON DUPLICATE KEY UPDATE
 		<trim prefix="" suffix="" suffixOverrides=",">
-			<if test="bean.roleName != null and bean.role_name != ''">
+			<if test="bean.roleName != null and bean.roleName != ''">
 				role_name = VALUES(role_name), 
 			</if>
 			<if test="bean.description != null and bean.description != ''">

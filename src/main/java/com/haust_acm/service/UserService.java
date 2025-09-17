@@ -7,7 +7,7 @@ import java.util.List;
 
 /**
  * @Description 用户Service
- * @Date 2025-09-13
+ * @Date 2025-09-15
  * @Author ouyu
  **/
 public interface UserService {
@@ -55,5 +55,10 @@ public interface UserService {
 	 * 根据UserId更新
 	 **/
 	Long updateUserByUserId(User bean, Long userId);
+
+	/**
+	 * 根据邮箱查询
+	 **/
+	User getUserByEmail(String email);
 
 }

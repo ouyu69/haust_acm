@@ -14,7 +14,7 @@ import org.springframework.stereotype.Service;
 
 /**
  * @Description 用户
- * @Date 2025-09-13
+ * @Date 2025-09-15
  * @Author ouyu
  **/
 @Service("UserService")
@@ -100,4 +100,11 @@ public class UserServiceImpl implements UserService {
 		return this.userMapper.updateByUserId(bean,userId);
 	}
 
+	/**
+	 * 根据邮箱查询
+	 **/
+	@Override
+	public User getUserByEmail(String email) {
+		return this.userMapper.selectByEmail(email);
+	}
 }

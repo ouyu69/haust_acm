@@ -3,14 +3,14 @@ package com.haust_acm.controller;
 import com.haust_acm.entity.vo.ResponseVO;
 import com.haust_acm.enums.ResponseCodeEnum;
 import com.haust_acm.exception.BusinessException;
+import javax.servlet.http.HttpServletRequest;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.dao.DuplicateKeyException;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
-import org.springframework.web.servlet.NoHandlerFoundException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
+import org.springframework.web.servlet.NoHandlerFoundException;
 
-import javax.servlet.http.HttpServletRequest;
 import java.net.BindException;
 
 @RestControllerAdvice

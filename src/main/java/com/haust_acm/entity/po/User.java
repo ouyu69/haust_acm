@@ -38,6 +38,10 @@ public class User implements Serializable {
 	 * 用户状态 0:为正常，1为封禁，3为删除
 	 **/
 	private Integer status;
+	/**
+	 * 头像链接
+	 */
+	private String avatarUrl;
 
 	/**
 	 * 用户创建时间
@@ -134,8 +138,28 @@ public class User implements Serializable {
 		this.updateTime = updateTime;
 	}
 
+	public String getAvatarUrl() {
+		return avatarUrl;
+	}
+
+	public void setAvatarUrl(String avatarUrl) {
+		this.avatarUrl = avatarUrl;
+	}
+
+
 	@Override
 	public String toString() {
-		return "用户id:" + (userId == null ? "空" : userId) + ",用户名:" + (userName == null ? "空" : userName) + ",用户邮箱:" + (email == null ? "空" : email) + ",用户密码:" + (password == null ? "空" : password) + ",用户状态 0:为正常，1为封禁，3为删除:" + (status == null ? "空" : status) + ",用户创建时间:" + (createTime == null ? "空" : DateUtils.format(createTime, DateTimePatternEnum.YYYY_MM_DD_HH_MM_SS.getPattern())) + ",用户最后一次登录时间:" + (lastLogin == null ? "空" : DateUtils.format(lastLogin, DateTimePatternEnum.YYYY_MM_DD_HH_MM_SS.getPattern())) + ",角色id:" + (roleId == null ? "空" : roleId);
+		return "User{" +
+			"用户id=" + userId +
+			", 用户名=" + userName +
+			", 用户邮箱=" + email +
+			", 用户密码=" + password +
+			", 用户状态 0:为正常，1为封禁，3为删除=" + status +
+			", 头像链接=" + avatarUrl +
+			", 用户创建时间=" + createTime +
+			",用户信息更新时间=" + updateTime +
+			", 用户最后一次登录时间=" + lastLogin +
+			", 角色id=" + roleId +
+			'}';
 	}
 }

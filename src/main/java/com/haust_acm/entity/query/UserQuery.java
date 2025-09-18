@@ -37,6 +37,7 @@ public class UserQuery extends BaseQuery {
 	 * 用户创建时间
 	 **/
 	private Date createTime;
+	private Date UpdateTime;
 
 	/**
 	 * 用户最后一次登录时间
@@ -82,6 +83,18 @@ public class UserQuery extends BaseQuery {
 	 * 用户最后一次登录时间,结束时间
 	 **/
 	private String lastLoginEnd;
+	/**
+	 * 用户更新时间,开始时间
+	 */
+	private String updateTimeStart;
+	/**
+	 * 用户更新时间,结束时间
+	 */
+	private String updateTimeEnd;
+	/**
+	 * 用户头像
+	 */
+	private String avatarUrl;
 
 
 	public Long getUserId() {
@@ -204,4 +217,35 @@ public class UserQuery extends BaseQuery {
 		this.lastLoginEnd = lastLoginEnd ;
 	}
 
+	public Date getUpdateTime() {
+		return UpdateTime;
+	}
+
+	public void setUpdateTime(Date updateTime) {
+		UpdateTime = updateTime;
+	}
+
+	public String getUpdateTimeStart() {
+		return updateTimeStart;
+	}
+
+	public void setUpdateTimeStart(String updateTimeStart) {
+		this.updateTimeStart = updateTimeStart;
+	}
+
+	public String getUpdateTimeEnd() {
+		return updateTimeEnd;
+	}
+
+	public void setUpdateTimeEnd(String updateTimeEnd) {
+		this.updateTimeEnd = updateTimeEnd;
+	}
+
+	public String getAvatarUrl() {
+		return avatarUrl;
+	}
+
+	public void setAvatarUrl(String avatarUrl) {
+		this.avatarUrl = avatarUrl;
+	}
 }

@@ -16,15 +16,19 @@
 		<result property="status" column="status"/>
 		<!--用户创建时间-->
 		<result property="createTime" column="create_time"/>
+		<!--用户信息更新时间-->
+		<result property="updateTime" column="update_time"/>
 		<!--用户最后一次登录时间-->
 		<result property="lastLogin" column="last_login"/>
 		<!--角色id-->
 		<result property="roleId" column="role_id"/>
+		<!--头像来链接-->
+		<result property="avatarUrl" column="avatar_url"/>
 	</resultMap>
 
 	<!--通用查询结果列-->
 	<sql id="base_column_list">
-		user_id,user_name,email,password,status,create_time,last_login,role_id
+		user_id,user_name,email,password,status,create_time,last_login,role_id,avatar_url
 	</sql>
 
 	<!--基础查询条件-->
@@ -53,6 +57,9 @@
 		<if test="query.roleId != null">
 			and role_id = #{query.roleId}
 		</if>
+		<if test= "query.avatarUrl != null and query.avatarUrl!= ''" >
+			and avatar_url = #{query.avatarUrl},
+		</if>
 	</sql>
 
 	<!--扩展的查询条件-->
@@ -77,6 +84,12 @@
 		</if>
 		<if test="query.lastLoginEnd != null and query.lastLoginEnd != ''">
 			<![CDATA[ and last_login < date_sub(str_to_date(#{query.lastLoginEnd},'%Y-%m-%d'), interval -1 day)]]>
+		</if>
+		<if test="query.updateTimeStart != null and query.updateTimeStart != ''">
+			<![CDATA[ and last_login >= str_to_date(#{query.lastLogiupdateTimeStart},'%Y-%m-%d')]]>
+		</if>
+		<if test="query.updateTimeEnd != null and query.updateTimeEnd != ''">
+			<![CDATA[ and last_login < date_sub(str_to_date(#{query.updateTimeEnd},'%Y-%m-%d'), interval -1 day)]]>
 		</if>
 	</sql>
 
@@ -131,6 +144,9 @@
 			<if test= "bean.roleId != null">
 				role_id, 
 			</if>
+			<if test= "bean.avatarUrl != null">
+				avatar_url,
+			</if>
 		</trim>
 		<trim prefix="VALUES (" suffix=")" suffixOverrides=",">
 			<if test= "bean.userId != null">
@@ -156,6 +172,9 @@
 			</if>
 			<if test= "bean.roleId != null">
 				#{bean.roleId}, 
+			</if>
+			<if test= "bean.avatarUrl != null and bean.avatarUrl!= ''" >
+				#{bean.avatarUrl},
 			</if>
 		</trim>
 	</insert>
@@ -188,6 +207,9 @@
 			<if test= "bean.roleId != null">
 				role_id, 
 			</if>
+			<if test= "bean.avatarUrl != null and bean.avatarUrl!= ''" >
+				avatar_url,
+			</if>
 		</trim>
 		<trim prefix="VALUES (" suffix=")" suffixOverrides=",">
 			<if test= "bean.userId != null">
@@ -214,6 +236,9 @@
 			<if test= "bean.roleId != null">
 				#{bean.roleId}, 
 			</if>
+			<if test= "bean.avatarUrl != null and bean.avatarUrl!= ''" >
+				#{bean.avatarUrl},
+			</if>
 		</trim>
 		ON DUPLICATE KEY UPDATE
 		<trim prefix="" suffix="" suffixOverrides=",">
@@ -238,22 +263,25 @@
 			<if test="bean.roleId != null">
 				role_id = VALUES(role_id), 
 			</if>
+			<if test= "bean.avatarUrl != null and bean.avatarUrl!= ''" >
+				avatar_url = VALUES(avatar_url),
+			</if>
 		</trim>
 	</insert>
 
 	<!--添加(批量擦插入)-->
 	<insert id="insertBatch" parameterType="com.haust_acm.entity.po.User" useGeneratedKeys="true" keyProperty="user_id">
-		INSERT INTO user (user_name,email,password,status,role_id) VALUES
+		INSERT INTO user (user_name,email,password,status,role_id,avatar_url) VALUES
 		<foreach collection="list" item="item" separator=",">
-			(#{item.userName},#{item.email},#{item.password},#{item.status},#{item.roleId})
+			(#{item.userName},#{item.email},#{item.password},#{item.status},#{item.roleId},#{item.avatarUrl})
 		</foreach>
 	</insert>
 
 	<!--批量插入或更新-->
 	<insert id="insertOrUpdateBatch" parameterType="com.haust_acm.entity.po.User" useGeneratedKeys="true" keyProperty="user_id">
-		INSERT INTO user (user_id,user_name,email,password,status,last_login,role_id) VALUES
+		INSERT INTO user (user_id,user_name,email,password,status,last_login,role_id,avatar_url) VALUES
 		<foreach collection="list" item="item" separator="," >
-			(#{item.userId},#{item.userName},#{item.email},#{item.password},#{item.status},#{item.lastLogin},#{item.roleId})
+			(#{item.userId},#{item.userName},#{item.email},#{item.password},#{item.status},#{item.lastLogin},#{item.roleId},#{item.avatarUrl})
 		</foreach>
 		ON DUPLICATE KEY UPDATE
 		user_id = VALUES(user_id),
@@ -263,6 +291,7 @@
 		status = VALUES(status),
 		last_login = VALUES(last_login),
 		role_id = VALUES(role_id)
+		avatar_url = VALUES(avatar_url),
 	</insert>
 
 
@@ -300,6 +329,9 @@
 			</if>
 			<if test="bean.roleId != null">
 				role_id = #{bean.roleId}
+			</if>
+			<if test= "bean.avatarUrl != null and bean.avatarUrl!= ''" >
+				avatar_url = #{bean.avatarUrl},
 			</if>
 		</set>
 		WHERE user_id = #{userId}

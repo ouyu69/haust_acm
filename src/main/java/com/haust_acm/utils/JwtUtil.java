@@ -14,6 +14,7 @@ import java.util.Date;
  * @Author ouyu
  * @Date 2025-09-17
  **/
+@Component
 public class JwtUtil {
     private static final String SECRET = ProperUtils.getString("jwt.secret");
     private static final long EXPIRATION = 86400000; // 24小时
